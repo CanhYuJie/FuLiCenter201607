@@ -7,7 +7,8 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
-import cn.ucai.fulicenter.R;
+import com.yujie.fulicenter201607.R;
+
 
 public class FlowIndicator extends View {
 

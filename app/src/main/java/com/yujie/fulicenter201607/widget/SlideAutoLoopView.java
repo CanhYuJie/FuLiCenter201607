@@ -14,11 +14,12 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.Scroller;
 
+import com.yujie.fulicenter201607.utils.ImageLoader;
+
 import java.lang.reflect.Field;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import cn.ucai.fulicenter.utils.ImageLoader;
 
 /**
  * 图片轮播

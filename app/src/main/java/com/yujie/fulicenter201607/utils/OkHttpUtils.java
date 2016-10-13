@@ -7,6 +7,7 @@ import android.os.Message;
 import com.google.gson.Gson;
 import com.yujie.fulicenter201607.FuLiCenterApplication;
 import com.yujie.fulicenter201607.I;
+import com.yujie.fulicenter201607.model.bean.Result;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -143,20 +144,20 @@ public class OkHttpUtils<T> {
 
 
     private void initHandler() {
-        mHandler = new Handler(FuLiCenterApplication.applicationContext.getMainLooper()) {
-            @Override
-            public void handleMessage(Message msg) {
-                switch (msg.what) {
-                    case RESULT_ERROR:
-                        mListener.onError(msg.obj==null?msg.toString():msg.obj.toString());
-                        break;
-                    case RESULT_SUCCESS:
-                        T result = (T) msg.obj;
-                        mListener.onSuccess(result);
-                        break;
-                }
-            }
-        };
+//        mHandler = new Handler(FuLiCenterApplication.applicationContext.getMainLooper()) {
+//            @Override
+//            public void handleMessage(Message msg) {
+//                switch (msg.what) {
+//                    case RESULT_ERROR:
+//                        mListener.onError(msg.obj==null?msg.toString():msg.obj.toString());
+//                        break;
+//                    case RESULT_SUCCESS:
+//                        T result = (T) msg.obj;
+//                        mListener.onSuccess(result);
+//                        break;
+//                }
+//            }
+//        };
     }
 
     /**

@@ -17,14 +17,15 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.yujie.fulicenter201607.I;
+import com.yujie.fulicenter201607.R;
+import com.yujie.fulicenter201607.model.bean.CategoryChildBean;
+import com.yujie.fulicenter201607.utils.ConvertUtils;
+import com.yujie.fulicenter201607.utils.ImageLoader;
+import com.yujie.fulicenter201607.view.activity.CategoryChildActivity;
+
 import java.util.ArrayList;
 
-import cn.ucai.fulicenter.I;
-import cn.ucai.fulicenter.R;
-import cn.ucai.fulicenter.activity.CategoryChildActivity;
-import cn.ucai.fulicenter.bean.CategoryChildBean;
-import cn.ucai.fulicenter.utils.ImageLoader;
-import cn.ucai.fulicenter.utils.Utils;
 
 /**
  * 显示分类中当前所属小类的列表
@@ -59,7 +60,7 @@ public class CatChildFilterButton extends Button {
         if(mgvCategory.getAdapter().getCount()<16){
             mPopupWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
         }else{
-            mPopupWindow.setHeight(Utils.px2dp(mContext, 200));
+            mPopupWindow.setHeight(ConvertUtils.px2dp(mContext, 200));
         }
         mPopupWindow.setTouchable(true);
         mPopupWindow.setOutsideTouchable(true);
@@ -70,9 +71,9 @@ public class CatChildFilterButton extends Button {
 
     private void initGridView() {
         mgvCategory=new GridView(mContext);
-        mgvCategory.setColumnWidth(Utils.px2dp(mContext, 1500));
-        mgvCategory.setHorizontalSpacing(Utils.px2dp(mContext, 10));
-        mgvCategory.setVerticalSpacing(Utils.px2dp(mContext, 10));
+        mgvCategory.setColumnWidth(ConvertUtils.px2dp(mContext, 1500));
+        mgvCategory.setHorizontalSpacing(ConvertUtils.px2dp(mContext, 10));
+        mgvCategory.setVerticalSpacing(ConvertUtils.px2dp(mContext, 10));
         mgvCategory.setNumColumns(GridView.AUTO_FIT);
         mgvCategory.setBackgroundColor(Color.TRANSPARENT);
         mgvCategory.setPadding(3, 3, 3, 3);
@@ -126,16 +127,16 @@ public class CatChildFilterButton extends Button {
         @Override
         public View getView(int position, View layout, final ViewGroup parent) {
             ViewChildHolder holder=null;
-            if(layout==null){
-                layout= View.inflate(context, R.layout.item_cat_filter, null);
-                holder=new ViewChildHolder();
-                holder.layoutItem=(RelativeLayout) layout.findViewById(R.id.layout_category_child);
-                holder.ivThumb=(ImageView) layout.findViewById(R.id.ivCategoryChildThumb);
-                holder.tvChildName=(TextView) layout.findViewById(R.id.tvCategoryChildName);
-                layout.setTag(holder);
-            }else{
-                holder=(ViewChildHolder) layout.getTag();
-            }
+//            if(layout==null){
+//                layout= View.inflate(context, R.layout.item_cat_filter, null);
+//                holder=new ViewChildHolder();
+//                holder.layoutItem=(RelativeLayout) layout.findViewById(R.id.layout_category_child);
+//                holder.ivThumb=(ImageView) layout.findViewById(R.id.ivCategoryChildThumb);
+//                holder.tvChildName=(TextView) layout.findViewById(R.id.tvCategoryChildName);
+//                layout.setTag(holder);
+//            }else{
+//                holder=(ViewChildHolder) layout.getTag();
+//            }
             final CategoryChildBean child =getItem(position);
             String name=child.getName();
             holder.tvChildName.setText(name);
