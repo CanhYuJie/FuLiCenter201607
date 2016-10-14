@@ -13,16 +13,18 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.yujie.fulicenter201607.R;
+import com.yujie.fulicenter201607.presenter.MainPre;
 import com.yujie.fulicenter201607.view.fragment.BoutiqueFragment;
 import com.yujie.fulicenter201607.view.fragment.CartFragment;
 import com.yujie.fulicenter201607.view.fragment.CategoryFragment;
 import com.yujie.fulicenter201607.view.fragment.NewGoodFragment;
 import com.yujie.fulicenter201607.view.fragment.Personal_CenterFragment;
+import com.yujie.fulicenter201607.view.interface_group.IMainView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IMainView{
     public static final String TAG = MainActivity.class.getSimpleName();
     @Bind(R.id.activity_main_ViewPager_fragmentViewpager)
     ViewPager activityMainViewPagerFragmentViewpager;
@@ -31,21 +33,21 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.activity_main_TextView_cart_number)
     TextView activityMainTextViewCartNumber;
     private Context mContext = MainActivity.this;
-    private CartHintBroadcastReceiver receiver;
+    private MainPre pre;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         initChose();
-        initReceiver();
+        initPre();
     }
 
-    private void initReceiver() {
-        receiver = new CartHintBroadcastReceiver();
-        IntentFilter filter = new IntentFilter("receiver_update_cart_hint");
-        registerReceiver(receiver,filter);
+    private void initPre() {
+        pre = new MainPre(this);
+        pre.setReceiver(this);
     }
+
 
     private void initChose() {
         activityMainRadioGroupGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -99,12 +101,10 @@ public class MainActivity extends AppCompatActivity {
         activityMainViewPagerFragmentViewpager.setCurrentItem(index);
     }
 
-    class CartHintBroadcastReceiver extends BroadcastReceiver{
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String cart_hint = getIntent().getStringExtra("cart_hint");
-            activityMainTextViewCartNumber.setText(cart_hint);
-        }
+    @Override
+    public void setReceiver(String msg) {
+        activityMainTextViewCartNumber.setText(msg);
     }
+
+
 }
