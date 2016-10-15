@@ -1,14 +1,12 @@
 package com.yujie.fulicenter201607.view.activity;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -34,6 +32,13 @@ public class MainActivity extends AppCompatActivity implements IMainView{
     TextView activityMainTextViewCartNumber;
     private Context mContext = MainActivity.this;
     private MainPre pre;
+    private int[] radioButtonArray = {
+            R.id.activity_main_RadioButton_new_good,
+            R.id.activity_main_RadioButton_boutique,
+            R.id.activity_main_RadioButton_category,
+            R.id.activity_main_RadioButton_cart,
+            R.id.activity_main_RadioButton_personal_center
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements IMainView{
 
 
     private void initChose() {
+        ((RadioButton)findViewById(radioButtonArray[0])).setChecked(true);
         activityMainRadioGroupGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -95,6 +101,22 @@ public class MainActivity extends AppCompatActivity implements IMainView{
                 return 5;
             }
         });
+        activityMainViewPagerFragmentViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                ((RadioButton)findViewById(radioButtonArray[position])).setChecked(true);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     private void setViewPagerIndex(int index) {
@@ -106,5 +128,10 @@ public class MainActivity extends AppCompatActivity implements IMainView{
         activityMainTextViewCartNumber.setText(msg);
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        pre.unBindReceiver(this);
+        ButterKnife.unbind(this);
+    }
 }

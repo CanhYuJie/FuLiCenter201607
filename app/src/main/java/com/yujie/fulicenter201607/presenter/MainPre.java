@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 
+import com.yujie.fulicenter201607.view.activity.MainActivity;
 import com.yujie.fulicenter201607.view.interface_group.IMainView;
 
 /**
@@ -24,6 +25,10 @@ public class MainPre {
         receiver = new CartHintBroadcastReceiver();
         IntentFilter filter = new IntentFilter("receiver_update_cart_hint");
         activity.registerReceiver(receiver,filter);
+    }
+
+    public void unBindReceiver(AppCompatActivity activity) {
+        activity.unregisterReceiver(receiver);
     }
 
     class CartHintBroadcastReceiver extends BroadcastReceiver {

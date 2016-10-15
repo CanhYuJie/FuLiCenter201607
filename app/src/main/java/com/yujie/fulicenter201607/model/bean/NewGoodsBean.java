@@ -1,31 +1,31 @@
 package com.yujie.fulicenter201607.model.bean;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by yujie on 16-10-13.
  */
 
 public class NewGoodsBean {
 
+
     /**
-     * id : 731
-     * goodsId : 6895
-     * catId : 345
-     * goodsName : IRM05W 幻彩蛹 变色鼠
-     * goodsEnglishName : i-rocks 艾芮克
-     * goodsBrief : 传说中IG战队用过的鼠标（啊，别问我IG是什么鬼，真的不知道！）。提供更高的精确度及细致度，USB高速侦测模组技术。3D多彩背光DC技术，可依你喜好设定所需颜色。即插即用，无需安装任何软件。
-     * shopPrice : ￥399
-     * currencyPrice : ￥414
+     * id : 1
+     * goodsId : 7672
+     * catId : 0
+     * goodsName : 趣味煮蛋模具
+     * goodsEnglishName : Kotobuki
+     * goodsBrief : 将煮好的鸡蛋放到模具中，扣好卡扣，把蛋模放冰水，耐心等上10分钟，就可以变化成各种各样的形状，宝宝看了说不定胃口大开！
+     * shopPrice : ￥110
+     * currencyPrice : ￥140
      * promotePrice : ￥0
-     * rankPrice : ￥414
+     * rankPrice : ￥0
      * isPromote : false
-     * goodsThumb : 201508/thumb_img/6895_thumb_G_1439355137855.jpg
-     * goodsImg : 201508/thumb_img/6895_thumb_G_1439355137855.jpg
-     * addTime : 1442419200000
-     * shareUrl : http://m.fulishe.com/item/6895
-     * properties : [{"id":8514,"goodsId":0,"colorId":4,"colorName":"绿色","colorCode":"#59d85c","colorImg":"201309/1380064997570506166.jpg","colorUrl":"https://cn.shopbop.com/alexa-chung-loretta-romper-ag/vp/v=1/1573999972.htm?fm=search-shopbysize&os=false","albums":[{"pid":6936,"imgId":26104,"imgUrl":"201508/goods_img/6936_P_1439535131675.png","thumbUrl":"no_picture.gif"}]},{"id":8514,"goodsId":0,"colorId":4,"colorName":"绿色","colorCode":"#59d85c","colorImg":"201309/1380064997570506166.jpg","colorUrl":"https://cn.shopbop.com/alexa-chung-loretta-romper-ag/vp/v=1/1573999972.htm?fm=search-shopbysize&os=false","albums":[{"pid":6936,"imgId":26104,"imgUrl":"201508/goods_img/6936_P_1439535131675.png","thumbUrl":"no_picture.gif"}]}]
+     * goodsThumb : 201509/thumb_img/7672_thumb_G_1442389445719.jpg
+     * goodsImg : 201509/goods_img/7672_P_1442389445199.jpg
+     * colorId : 4
+     * colorName : 绿色
+     * colorCode : #59d85c
+     * colorUrl : 1
+     * addTime : 1442389445
      * promote : false
      */
 
@@ -42,21 +42,12 @@ public class NewGoodsBean {
     private boolean isPromote;
     private String goodsThumb;
     private String goodsImg;
+    private int colorId;
+    private String colorName;
+    private String colorCode;
+    private String colorUrl;
     private long addTime;
-    private String shareUrl;
     private boolean promote;
-    /**
-     * id : 8514
-     * goodsId : 0
-     * colorId : 4
-     * colorName : 绿色
-     * colorCode : #59d85c
-     * colorImg : 201309/1380064997570506166.jpg
-     * colorUrl : https://cn.shopbop.com/alexa-chung-loretta-romper-ag/vp/v=1/1573999972.htm?fm=search-shopbysize&os=false
-     * albums : [{"pid":6936,"imgId":26104,"imgUrl":"201508/goods_img/6936_P_1439535131675.png","thumbUrl":"no_picture.gif"}]
-     */
-
-    private ArrayList<PropertiesBean> properties;
 
     public int getId() {
         return id;
@@ -162,20 +153,44 @@ public class NewGoodsBean {
         this.goodsImg = goodsImg;
     }
 
+    public int getColorId() {
+        return colorId;
+    }
+
+    public void setColorId(int colorId) {
+        this.colorId = colorId;
+    }
+
+    public String getColorName() {
+        return colorName;
+    }
+
+    public void setColorName(String colorName) {
+        this.colorName = colorName;
+    }
+
+    public String getColorCode() {
+        return colorCode;
+    }
+
+    public void setColorCode(String colorCode) {
+        this.colorCode = colorCode;
+    }
+
+    public String getColorUrl() {
+        return colorUrl;
+    }
+
+    public void setColorUrl(String colorUrl) {
+        this.colorUrl = colorUrl;
+    }
+
     public long getAddTime() {
         return addTime;
     }
 
     public void setAddTime(long addTime) {
         this.addTime = addTime;
-    }
-
-    public String getShareUrl() {
-        return shareUrl;
-    }
-
-    public void setShareUrl(String shareUrl) {
-        this.shareUrl = shareUrl;
     }
 
     public boolean isPromote() {
@@ -185,13 +200,4 @@ public class NewGoodsBean {
     public void setPromote(boolean promote) {
         this.promote = promote;
     }
-
-    public ArrayList<PropertiesBean> getProperties() {
-        return properties;
-    }
-
-    public void setProperties(ArrayList<PropertiesBean> properties) {
-        this.properties = properties;
-    }
-
 }
