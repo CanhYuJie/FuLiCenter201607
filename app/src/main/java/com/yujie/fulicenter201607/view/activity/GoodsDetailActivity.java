@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,14 +53,30 @@ public class GoodsDetailActivity extends AppCompatActivity implements IGoodsDeta
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goods_detail);
+        ButterKnife.bind(this);
         initGoodId();
         initPre();
-        ButterKnife.bind(this);
+        initCheckBoxCollect();
+    }
+
+    private void initCheckBoxCollect() {
+        activityGoodsDetailImageViewCollect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    //collect goods;
+                    pre.collect_goods(goods_id);
+                }else {
+                    pre.delete_collect(goods_id);
+                }
+            }
+        });
     }
 
     private void initPre() {
         pre = new GoodsDetailPre(this, this);
         pre.getDetails(goods_id);
+        pre.getCollect(goods_id);
     }
 
     private void initGoodId() {
@@ -70,10 +87,13 @@ public class GoodsDetailActivity extends AppCompatActivity implements IGoodsDeta
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.activity_goods_detail_ImageView_back:
+                finish();
                 break;
             case R.id.activity_goods_detail_ImageView_share:
+
                 break;
             case R.id.activity_goods_detail_ImageView_add_cart:
+
                 break;
         }
     }
@@ -111,5 +131,15 @@ public class GoodsDetailActivity extends AppCompatActivity implements IGoodsDeta
     @Override
     public void getDataFailed(String msg) {
         Toast.makeText(GoodsDetailActivity.this, msg, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void get_collected(boolean collect_flag) {
+        activityGoodsDetailImageViewCollect.setChecked(collect_flag);
+    }
+
+    @Override
+    public void collect_good(boolean collect_flag) {
+        activityGoodsDetailImageViewCollect.setChecked(collect_flag);
     }
 }

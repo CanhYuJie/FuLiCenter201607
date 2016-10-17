@@ -8,6 +8,7 @@ import android.content.Context;
  */
 
 public  class FuLiCenterApplication extends Application {
+    public static final String User = "yujie";
     public static final String TAG = FuLiCenterApplication.class.getSimpleName();
     private static FuLiCenterApplication instance = null;
     public static Context applicationContext = getInstance();

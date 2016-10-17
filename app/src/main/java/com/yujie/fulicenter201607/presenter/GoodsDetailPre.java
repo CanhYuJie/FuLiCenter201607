@@ -2,8 +2,10 @@ package com.yujie.fulicenter201607.presenter;
 
 import android.support.v7.app.AppCompatActivity;
 
+import com.yujie.fulicenter201607.FuLiCenterApplication;
 import com.yujie.fulicenter201607.I;
 import com.yujie.fulicenter201607.model.bean.GoodsDetailsBean;
+import com.yujie.fulicenter201607.model.bean.MessageBean;
 import com.yujie.fulicenter201607.utils.OkHttpUtils;
 import com.yujie.fulicenter201607.view.interface_group.IGoodsDetailView;
 
@@ -30,6 +32,69 @@ public class GoodsDetailPre {
                     public void onSuccess(GoodsDetailsBean result) {
                         if (result!=null){
                             view.getDataSuccess(result);
+                        }
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        view.getDataFailed(error);
+                    }
+                });
+    }
+
+    public void getCollect(String goods_id){
+        OkHttpUtils<MessageBean> utils = new OkHttpUtils<>(activity);
+        utils.setRequestUrl(I.REQUEST_IS_COLLECT)
+                .addParam(I.Collect.GOODS_ID,goods_id)
+                .addParam(I.Collect.USER_NAME, FuLiCenterApplication.User)
+                .targetClass(MessageBean.class)
+                .execute(new OkHttpUtils.OnCompleteListener<MessageBean>() {
+                    @Override
+                    public void onSuccess(MessageBean result) {
+                        if (result != null){
+                            view.get_collected(result.isSuccess());
+                        }
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        view.getDataFailed(error);
+                    }
+                });
+    }
+
+    public void collect_goods(String goods_id){
+        OkHttpUtils<MessageBean> utils = new OkHttpUtils<>(activity);
+        utils.setRequestUrl(I.REQUEST_ADD_COLLECT)
+                .addParam(I.Collect.GOODS_ID,goods_id)
+                .addParam(I.Collect.USER_NAME, FuLiCenterApplication.User)
+                .targetClass(MessageBean.class)
+                .execute(new OkHttpUtils.OnCompleteListener<MessageBean>() {
+                    @Override
+                    public void onSuccess(MessageBean result) {
+                        if (result != null){
+                            view.collect_good(result.isSuccess());
+                        }
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        view.getDataFailed(error);
+                    }
+                });
+    }
+
+    public void delete_collect(String goods_id) {
+        OkHttpUtils<MessageBean> utils = new OkHttpUtils<>(activity);
+        utils.setRequestUrl(I.REQUEST_DELETE_COLLECT)
+                .addParam(I.Collect.GOODS_ID,goods_id)
+                .addParam(I.Collect.USER_NAME, FuLiCenterApplication.User)
+                .targetClass(MessageBean.class)
+                .execute(new OkHttpUtils.OnCompleteListener<MessageBean>() {
+                    @Override
+                    public void onSuccess(MessageBean result) {
+                        if (result != null){
+                            view.collect_good(!result.isSuccess());
                         }
                     }
 

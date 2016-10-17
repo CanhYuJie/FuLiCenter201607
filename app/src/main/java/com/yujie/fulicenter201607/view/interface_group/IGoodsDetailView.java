@@ -9,4 +9,6 @@ import com.yujie.fulicenter201607.model.bean.GoodsDetailsBean;
 public interface IGoodsDetailView {
     void getDataSuccess(GoodsDetailsBean details);
     void getDataFailed(String msg);
+    void get_collected(boolean collect_flag);
+    void collect_good(boolean collect_flag);
 }
