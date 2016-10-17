@@ -1,7 +1,6 @@
 package com.yujie.fulicenter201607.presenter;
 
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -68,7 +67,7 @@ public class BaotiquePre {
                 holder.setOnClickListener(R.id.adapter_item_boutique_root, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        view.go_boutique(boutiqueBean.getId()+"");
+                        view.go_boutique(boutiqueBean);
                     }
                 });
             }

@@ -46,17 +46,19 @@ public class NewGoodPre {
     public static int METHOD_REFRESH = 101;
     public static int METHOD_LOADMORE = 102;
     public static int METHOD_INIT = 103;
-    public NewGoodPre(INewGoodsView view,FragmentActivity activity,RecyclerView recycleView) {
+    private int cat_id;
+    public NewGoodPre(INewGoodsView view,FragmentActivity activity,RecyclerView recycleView,int cat_id) {
         this.view = view;
         this.activity = activity;
         this.recycleView = recycleView;
+        this.cat_id = cat_id;
         initAdater();
     }
 
     public void getNewGoods(final int page_id, int page_size, final int method, final SwipeRefreshLayout fragmentSwipeRefreshLayoutRefresh){
         OkHttpUtils<NewGoodsBean[]> utils = new OkHttpUtils<>(activity);
         utils.setRequestUrl(I.REQUEST_FIND_NEW_BOUTIQUE_GOODS)
-                .addParam(I.NewAndBoutiqueGoods.CAT_ID,I.CAT_ID+"")
+                .addParam(I.NewAndBoutiqueGoods.CAT_ID,cat_id+"")
                 .addParam(I.PAGE_ID,page_id+"")
                 .addParam(I.PAGE_SIZE,page_size+"")
                 .targetClass(NewGoodsBean[].class)
@@ -127,7 +129,7 @@ public class NewGoodPre {
             public void onLoadMoreRequested() {
                 if (list.size()==0){
                     DEF_PAGE_ID = 1;
-                    getNewGoods(DEF_PAGE_ID,DEF_PAGE_SIZE,METHOD_LOADMORE, null);
+                    getNewGoods(DEF_PAGE_ID,DEF_PAGE_SIZE,METHOD_INIT, null);
                 }else {
                     DEF_PAGE_ID ++;
                     getNewGoods(DEF_PAGE_ID,DEF_PAGE_SIZE,METHOD_LOADMORE, null);

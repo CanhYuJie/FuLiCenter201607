@@ -1,6 +1,7 @@
 package com.yujie.fulicenter201607.view.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -11,7 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.yujie.fulicenter201607.R;
+import com.yujie.fulicenter201607.model.bean.BoutiqueBean;
 import com.yujie.fulicenter201607.presenter.BaotiquePre;
+import com.yujie.fulicenter201607.view.activity.BoutiqueActivity;
 import com.yujie.fulicenter201607.view.interface_group.IBaotiqueView;
 
 import butterknife.Bind;
@@ -48,9 +51,14 @@ public class BoutiqueFragment extends Fragment implements IBaotiqueView{
     }
 
     @Override
-    public void go_boutique(String cat_id) {
-        Log.e(TAG, "go_boutique: "+cat_id);
+    public void go_boutique(BoutiqueBean boutiqueBean) {
+        Intent intent = new Intent(getActivity(), BoutiqueActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("boutique",boutiqueBean);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
+
 
     @Override
     public void onDestroy() {

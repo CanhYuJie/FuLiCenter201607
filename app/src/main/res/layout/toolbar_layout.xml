@@ -6,7 +6,7 @@
     <android.support.v7.widget.Toolbar
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:background="#bd07b4fd"
+        android:background="#bdf46309"
         android:minHeight="?attr/actionBarSize"
         android:id="@+id/fragment_Toolbar_titlebar"
         >

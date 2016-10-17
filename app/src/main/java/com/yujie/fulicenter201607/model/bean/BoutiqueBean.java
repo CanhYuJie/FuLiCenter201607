@@ -1,10 +1,12 @@
 package com.yujie.fulicenter201607.model.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by yujie on 16-10-13.
  */
 
-public class BoutiqueBean {
+public class BoutiqueBean implements Serializable{
     /**
      * id : 262
      * title : 不一样的新妆，不一样的美丽
