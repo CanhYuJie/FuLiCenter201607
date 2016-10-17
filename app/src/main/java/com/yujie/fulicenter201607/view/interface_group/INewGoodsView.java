@@ -6,6 +6,6 @@ package com.yujie.fulicenter201607.view.interface_group;
  */
 
 public interface INewGoodsView {
-    void getDataSuccess();
+    void goDetail(int goods_id);
     void getDataFailed(String msg);
 }

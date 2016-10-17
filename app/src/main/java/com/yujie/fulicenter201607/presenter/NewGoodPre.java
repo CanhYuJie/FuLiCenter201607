@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,6 +22,8 @@ import com.zhy.adapter.recyclerview.wrapper.HeaderAndFooterWrapper;
 import com.zhy.adapter.recyclerview.wrapper.LoadMoreWrapper;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Created by yujie on 16-10-14.
@@ -39,6 +42,7 @@ public class NewGoodPre {
     private LoadMoreWrapper loadMoreWrapper;
     private HeaderAndFooterWrapper wrapper;
     private TextView footText;
+    private int DEFAULT_SORT_ID = 1;
     public static int METHOD_REFRESH = 101;
     public static int METHOD_LOADMORE = 102;
     public static int METHOD_INIT = 103;
@@ -46,6 +50,7 @@ public class NewGoodPre {
         this.view = view;
         this.activity = activity;
         this.recycleView = recycleView;
+        initAdater();
     }
 
     public void getNewGoods(final int page_id, int page_size, final int method, final SwipeRefreshLayout fragmentSwipeRefreshLayoutRefresh){
@@ -63,14 +68,18 @@ public class NewGoodPre {
                             if (method == METHOD_REFRESH){
                                 list.clear();
                                 list.addAll(newGoodsBeen);
-                                adapter.notifyDataSetChanged();
+                                list = ConvertUtils.sortData(DEFAULT_SORT_ID,list);
+                                loadMoreWrapper.notifyDataSetChanged();
                                 fragmentSwipeRefreshLayoutRefresh.setRefreshing(false);
                             }else if (method == METHOD_LOADMORE){
                                 list.addAll(newGoodsBeen);
+                                list = ConvertUtils.sortData(DEFAULT_SORT_ID,list);
                                 loadMoreWrapper.notifyDataSetChanged();
                             }else if (method == METHOD_INIT){
-                                list = newGoodsBeen;
-                                setAdater();
+                                list.clear();
+                                list.addAll(newGoodsBeen);
+                                list = ConvertUtils.sortData(DEFAULT_SORT_ID,list);
+                                loadMoreWrapper.notifyDataSetChanged();
                             }
 
                         }else {
@@ -87,19 +96,26 @@ public class NewGoodPre {
                 });
     }
 
-    public void setAdater(){
+
+    public void initAdater(){
         list = new ArrayList<>();
         manager = new GridLayoutManager(activity,2);
         recycleView.setLayoutManager(manager);
         adapter = new CommonAdapter<NewGoodsBean>(activity, R.layout.new_goods_item_layout, list) {
             @Override
-            protected void convert(ViewHolder holder, NewGoodsBean newGoodsBean, int position) {
+            protected void convert(ViewHolder holder, final NewGoodsBean newGoodsBean, int position) {
                 Picasso.with(activity).load(I.DOWNLOAD_IMG_URL+newGoodsBean.getGoodsThumb())
                         .placeholder(R.drawable.nopic)
                         .error(R.drawable.nopic)
                         .into((ImageView) holder.getView(R.id.adapter_item_new_goods_img));
                 holder.setText(R.id.adapter_item_new_goods_name,newGoodsBean.getGoodsName());
                 holder.setText(R.id.adapter_item_new_goods_price,newGoodsBean.getCurrencyPrice());
+                holder.setOnClickListener(R.id.adapter_item_new_goods_root, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        view.goDetail(newGoodsBean.getGoodsId());
+                    }
+                });
             }
         };
         loadMoreWrapper = new LoadMoreWrapper(adapter);
@@ -118,11 +134,8 @@ public class NewGoodPre {
                 }
             }
         });
+
         recycleView.setAdapter(loadMoreWrapper);
-    }
-
-    public void sort(int sort_id){
-
     }
 
     public void refresh(SwipeRefreshLayout fragmentSwipeRefreshLayoutRefresh){
@@ -131,4 +144,9 @@ public class NewGoodPre {
         getNewGoods(DEF_PAGE_ID,DEF_PAGE_SIZE,METHOD_REFRESH,fragmentSwipeRefreshLayoutRefresh);
     }
 
+    public void sortData(int sort_id) {
+        DEFAULT_SORT_ID = sort_id;
+        list = ConvertUtils.sortData(DEFAULT_SORT_ID,list);
+        loadMoreWrapper.notifyDataSetChanged();
+    }
 }

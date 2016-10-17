@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:drawable="@mipmap/bg_share_nor"/>
-    <item android:drawable="@mipmap/bg_share_sel"
+    <item android:drawable="@mipmap/back_nomal"/>
+    <item android:drawable="@mipmap/back_press"
         android:state_pressed="true"/>
 </selector>

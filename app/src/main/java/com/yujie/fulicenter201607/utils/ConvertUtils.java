@@ -2,8 +2,13 @@ package com.yujie.fulicenter201607.utils;
 
 import android.content.Context;
 
+import com.yujie.fulicenter201607.I;
+import com.yujie.fulicenter201607.model.bean.NewGoodsBean;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -23,4 +28,65 @@ public class ConvertUtils {
         return px/density;
     }
 
+    public static ArrayList<NewGoodsBean> sortData(int sortType, ArrayList<NewGoodsBean> list) {
+        switch (sortType){
+            case I.SORT_BY_PRICE_ASC:
+                Collections.sort(list, new Comparator<NewGoodsBean>() {
+                    @Override
+                    public int compare(NewGoodsBean lhs, NewGoodsBean rhs) {
+                        String lhsCurrencyPrice = lhs.getCurrencyPrice();
+                        String rhsCurrentyPrice = rhs.getCurrencyPrice();
+                        long lhsPrice = Long.parseLong(lhsCurrencyPrice.substring(1, lhsCurrencyPrice.length()));
+                        long rhsPrice = Long.parseLong(rhsCurrentyPrice.substring(1,rhsCurrentyPrice.length()));
+                        if(lhsPrice>rhsPrice){
+                            return 1;
+                        }
+                        return -1;
+                    }
+                });
+                break;
+            case I.SORT_BY_PRICE_DESC:
+                Collections.sort(list, new Comparator<NewGoodsBean>() {
+                    @Override
+                    public int compare(NewGoodsBean lhs, NewGoodsBean rhs) {
+                        String lhsCurrencyPrice = lhs.getCurrencyPrice();
+                        String rhsCurrentyPrice = rhs.getCurrencyPrice();
+                        long lhsPrice = Long.parseLong(lhsCurrencyPrice.substring(1, lhsCurrencyPrice.length()));
+                        long rhsPrice = Long.parseLong(rhsCurrentyPrice.substring(1,rhsCurrentyPrice.length()));
+                        if(lhsPrice<rhsPrice){
+                            return 1;
+                        }
+                        return -1;
+                    }
+                });
+                break;
+            case I.SORT_BY_ADDTIME_ASC:
+                Collections.sort(list, new Comparator<NewGoodsBean>() {
+                    @Override
+                    public int compare(NewGoodsBean lhs, NewGoodsBean rhs) {
+                        long lhsaddTime = lhs.getAddTime();
+                        long rhsaddTime = rhs.getAddTime();
+                        if(lhsaddTime>rhsaddTime){
+                            return 1;
+                        }
+                        return -1;
+                    }
+                });
+                break;
+            case I.SORT_BY_ADDTIME_DESC:
+                Collections.sort(list, new Comparator<NewGoodsBean>() {
+                    @Override
+                    public int compare(NewGoodsBean lhs, NewGoodsBean rhs) {
+                        long lhsaddTime = lhs.getAddTime();
+                        long rhsaddTime = rhs.getAddTime();
+                        if(lhsaddTime<rhsaddTime){
+                            return 1;
+                        }
+                        return -1;
+                    }
+                });
+                break;
+        }
+        return list;
+    }
 }
