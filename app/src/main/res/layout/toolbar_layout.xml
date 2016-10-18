@@ -11,4 +11,28 @@
         android:id="@+id/fragment_Toolbar_titlebar"
         >
     </android.support.v7.widget.Toolbar>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/category_root"
+        android:orientation="horizontal"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:gravity="center_horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="美妆"
+            android:textSize="24dp"
+            android:id="@+id/category_name"
+            android:textColor="@color/black"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/category_arrow"
+            android:src="@drawable/arrow2_down"/>
+    </LinearLayout>
 </android.support.percent.PercentRelativeLayout>

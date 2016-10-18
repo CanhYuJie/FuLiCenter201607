@@ -31,7 +31,7 @@
         <activity android:name=".view.activity.CategoryChildActivity" />
         <activity android:name=".view.activity.GoodsDetailActivity" />
         <activity android:name=".view.activity.BoutiqueActivity"></activity>
-
+        <activity android:name=".view.activity.CategoryActivity"></activity>
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"

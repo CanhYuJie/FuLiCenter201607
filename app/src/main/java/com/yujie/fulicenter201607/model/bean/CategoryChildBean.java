@@ -1,10 +1,12 @@
 package com.yujie.fulicenter201607.model.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by yujie on 16-10-13.
  */
 
-public class CategoryChildBean {
+public class CategoryChildBean implements Serializable{
 
     /**
      * id : 345

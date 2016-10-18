@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#c2bcbc"
+    android:id="@+id/fragment_root"
     tools:context="com.yujie.fulicenter201607.view.fragment.NewGoodFragment">
 
     <android.support.percent.PercentRelativeLayout

@@ -1,6 +1,7 @@
 package com.yujie.fulicenter201607.view.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -13,6 +14,8 @@ import android.widget.ExpandableListView;
 import com.yujie.fulicenter201607.R;
 import com.yujie.fulicenter201607.model.bean.CategoryChildBean;
 import com.yujie.fulicenter201607.presenter.CategoryPre;
+import com.yujie.fulicenter201607.view.activity.BoutiqueActivity;
+import com.yujie.fulicenter201607.view.activity.CategoryActivity;
 import com.yujie.fulicenter201607.view.interface_group.ICategoryView;
 
 import butterknife.Bind;
@@ -44,6 +47,10 @@ public class CategoryFragment extends Fragment implements ICategoryView{
 
     @Override
     public void childClick(CategoryChildBean child) {
-        Log.e(TAG, "childClick: "+child.getParentId()+"\n"+child.getId()+"\n"+child.getName() );
+        Intent intent = new Intent(getActivity(), CategoryActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("category",child);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

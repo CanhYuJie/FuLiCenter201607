@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.yujie.fulicenter201607.I;
 import com.yujie.fulicenter201607.R;
+import com.yujie.fulicenter201607.model.bean.CategoryChildBean;
 import com.yujie.fulicenter201607.model.bean.NewGoodsBean;
 import com.yujie.fulicenter201607.presenter.NewGoodPre;
 import com.yujie.fulicenter201607.utils.ToolbarUtil;
@@ -52,7 +53,6 @@ public class NewGoodFragment extends Fragment implements INewGoodsView{
         initToolbar();
         initRefresh();
         pre = new NewGoodPre(this,getActivity(),fragmentRecyclerViewNewGoods,0);
-        pre.getNewGoods(1,10,NewGoodPre.METHOD_INIT, null);
         return view;
     }
 
@@ -111,5 +111,10 @@ public class NewGoodFragment extends Fragment implements INewGoodsView{
     @Override
     public void getDataFailed(String msg) {
         Toast.makeText(getActivity(),msg,Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void replaceData(CategoryChildBean child) {
+
     }
 }

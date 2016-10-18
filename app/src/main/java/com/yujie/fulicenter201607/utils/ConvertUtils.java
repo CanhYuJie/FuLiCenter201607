@@ -93,6 +93,8 @@ public class ConvertUtils {
         return list;
     }
 
+
+
     public   static   ArrayList<?>  removeDuplicateWithOrder(ArrayList<?> list)   {
         Set set  =   new HashSet();
         ArrayList newList  =   new  ArrayList();
