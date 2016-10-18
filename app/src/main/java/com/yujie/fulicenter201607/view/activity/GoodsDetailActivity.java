@@ -15,6 +15,7 @@ import com.yujie.fulicenter201607.model.bean.AlbumsBean;
 import com.yujie.fulicenter201607.model.bean.GoodsDetailsBean;
 import com.yujie.fulicenter201607.model.bean.PropertiesBean;
 import com.yujie.fulicenter201607.presenter.GoodsDetailPre;
+import com.yujie.fulicenter201607.utils.ShareUtils;
 import com.yujie.fulicenter201607.view.interface_group.IGoodsDetailView;
 import com.yujie.fulicenter201607.widget.YuJieLoopView;
 
@@ -90,7 +91,7 @@ public class GoodsDetailActivity extends AppCompatActivity implements IGoodsDeta
                 finish();
                 break;
             case R.id.activity_goods_detail_ImageView_share:
-
+                pre.share();
                 break;
             case R.id.activity_goods_detail_ImageView_add_cart:
 
@@ -141,5 +142,13 @@ public class GoodsDetailActivity extends AppCompatActivity implements IGoodsDeta
     @Override
     public void collect_good(boolean collect_flag) {
         activityGoodsDetailImageViewCollect.setChecked(collect_flag);
+    }
+
+    @Override
+    public void share(GoodsDetailsBean goodsDetails) {
+        ShareUtils.showShare(this,goodsDetails.getGoodsName(),
+                goodsDetails.getShareUrl(),goodsDetails.getGoodsBrief(),
+                goodsDetails.getGoodsImg(),goodsDetails.getShareUrl(),
+                goodsDetails.getGoodsBrief(),null,null);
     }
 }

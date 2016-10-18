@@ -4,10 +4,12 @@
     android:layout_height="match_parent"
     tools:context="com.yujie.fulicenter201607.view.fragment.CategoryFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ExpandableListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/fragment_ExpandableListView_category"
+        >
+
+    </ExpandableListView>
 
 </FrameLayout>

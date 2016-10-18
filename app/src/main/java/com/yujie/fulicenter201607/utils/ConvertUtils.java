@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 各种转换方法的工具类
@@ -88,5 +91,16 @@ public class ConvertUtils {
                 break;
         }
         return list;
+    }
+
+    public   static   ArrayList<?>  removeDuplicateWithOrder(ArrayList<?> list)   {
+        Set set  =   new HashSet();
+        ArrayList newList  =   new  ArrayList();
+        for  (Iterator iter = list.iterator(); iter.hasNext();)   {
+            Object element  =  iter.next();
+            if  (set.add(element))
+                newList.add(element);
+        }
+        return newList;
     }
 }

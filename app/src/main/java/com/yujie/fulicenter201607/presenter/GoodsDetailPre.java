@@ -16,7 +16,7 @@ import com.yujie.fulicenter201607.view.interface_group.IGoodsDetailView;
 public class GoodsDetailPre {
     private IGoodsDetailView view;
     private AppCompatActivity activity;
-
+    private GoodsDetailsBean currentGoods;
     public GoodsDetailPre(IGoodsDetailView view, AppCompatActivity activity) {
         this.view = view;
         this.activity = activity;
@@ -31,6 +31,7 @@ public class GoodsDetailPre {
                     @Override
                     public void onSuccess(GoodsDetailsBean result) {
                         if (result!=null){
+                            currentGoods = result;
                             view.getDataSuccess(result);
                         }
                     }
@@ -103,5 +104,9 @@ public class GoodsDetailPre {
                         view.getDataFailed(error);
                     }
                 });
+    }
+
+    public void share() {
+        view.share(currentGoods);
     }
 }
