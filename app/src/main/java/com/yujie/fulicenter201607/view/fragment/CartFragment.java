@@ -55,6 +55,7 @@ public class CartFragment extends Fragment implements ICartView{
             @Override
             public void onRefresh() {
                 pre.findCarts(CartPre.CODE_REFRESH);
+                cartRefreshLayout.setRefreshing(false);
             }
         });
     }

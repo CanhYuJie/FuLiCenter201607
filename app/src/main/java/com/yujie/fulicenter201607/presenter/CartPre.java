@@ -1,5 +1,6 @@
 package com.yujie.fulicenter201607.presenter;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -44,10 +45,8 @@ public class CartPre {
     public static final int CODE_REFRESH = 1002;
     public static final int CODE_LOADMORE = 1003;
     private CommonAdapter<CartBean> cartAdapter;
-    private LoadMoreWrapper loadMoreWrapper;
     private ArrayList<CartBean> cartlist;
     private HashMap<Integer,GoodsDetailsBean> goodsDetailsList;
-    private TextView footText;
     public CartPre(FragmentActivity activity, ICartView view,RecyclerView recyclerView, SwipeRefreshLayout refreshLayout) {
         this.activity = activity;
         this.view = view;
@@ -111,23 +110,7 @@ public class CartPre {
 
             }
         };
-        loadMoreWrapper = new LoadMoreWrapper(cartAdapter);
-        footText = new TextView(activity);
-        footText.setText("正在加载更多数据...");
-        loadMoreWrapper.setLoadMoreView(footText);
-        loadMoreWrapper.setOnLoadMoreListener(new LoadMoreWrapper.OnLoadMoreListener() {
-            @Override
-            public void onLoadMoreRequested() {
-                if (cartlist.size()<=DEF_PAGE_SIZE){
-                    DEF_PAGE_ID = 1;
-                    findCarts(CODE_INIT);
-                }else {
-                    DEF_PAGE_ID ++;
-                    findCarts(CODE_LOADMORE);
-                }
-            }
-        });
-        recyclerView.setAdapter(loadMoreWrapper);
+        recyclerView.setAdapter(cartAdapter);
     }
 
     private void refreshCartCount(int cart_id, final int count, boolean checked, final ViewHolder holder) {
@@ -174,6 +157,7 @@ public class CartPre {
                 continue;
             }
         }
+        activity.sendBroadcast(new Intent("receiver_update_cart_hint").putExtra("cart_hint",cartlist.size()+""));
         view.changeCount(sum+"",total-sum+"");
     }
 
@@ -193,8 +177,6 @@ public class CartPre {
                 .addParam(I.Cart.USER_NAME,
                         FuLiCenterApplication.getInstance().getCurrentUser().getRetData()
                 .getMuserName())
-                .addParam(I.PAGE_ID,String.valueOf(DEF_PAGE_ID))
-                .addParam(I.PAGE_SIZE,String.valueOf(DEF_PAGE_SIZE))
                 .targetClass(CartBean[].class)
                 .execute(new OkHttpUtils.OnCompleteListener<CartBean[]>() {
                     @Override
@@ -209,14 +191,9 @@ public class CartPre {
                                     cartlist.clear();
                                     goodsDetailsList.clear();
                                     cartlist.addAll(cartBeen);
-                                    refreshLayout.setRefreshing(false);
-                                    downloadGoodsDetail(cartBeen,method);
-                                }else if (method == CODE_LOADMORE){
-                                    cartlist.addAll(ConvertUtils.array2List(result));
                                     downloadGoodsDetail(cartBeen,method);
                                 }
                             }else {
-                                footText.setText("没有更多数据");
                                 return;
                             }
                         }
@@ -257,10 +234,7 @@ public class CartPre {
                                         initAdapter();
                                         initMainCount();
                                     }else if (method == CODE_REFRESH){
-                                        loadMoreWrapper.notifyDataSetChanged();
-                                        initMainCount();
-                                    }else if (method == CODE_LOADMORE){
-                                        loadMoreWrapper.notifyDataSetChanged();
+                                        cartAdapter.notifyDataSetChanged();
                                         initMainCount();
                                     }
                                 }
@@ -271,10 +245,8 @@ public class CartPre {
                                         initAdapter();
                                         initMainCount();
                                     }else if (method == CODE_REFRESH){
-                                        loadMoreWrapper.notifyDataSetChanged();
-                                        initMainCount();
-                                    }else if (method == CODE_LOADMORE){
-                                        loadMoreWrapper.notifyDataSetChanged();
+                                        cartAdapter.notifyDataSetChanged();
+
                                         initMainCount();
                                     }
                                 }

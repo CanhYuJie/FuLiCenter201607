@@ -1,10 +1,12 @@
 package com.yujie.fulicenter201607.model.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by yujie on 16-10-13.
  */
 
-public class Result {
+public class Result implements Serializable{
 
     /**
      * retCode : 0
@@ -50,7 +52,7 @@ public class Result {
         this.retData = retData;
     }
 
-    public static class RetDataBean {
+    public static class RetDataBean implements Serializable{
         private String muserName;
         private String muserNick;
         private int mavatarId;

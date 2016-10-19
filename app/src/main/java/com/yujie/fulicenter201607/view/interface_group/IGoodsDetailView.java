@@ -12,5 +12,5 @@ public interface IGoodsDetailView {
     void get_collected(boolean collect_flag);
     void collect_good(boolean collect_flag);
     void share(GoodsDetailsBean goodsDetails);
-    void carted();
+    void carted(String cart_count);
 }

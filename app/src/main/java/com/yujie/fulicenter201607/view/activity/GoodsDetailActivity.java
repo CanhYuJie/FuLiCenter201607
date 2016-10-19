@@ -87,6 +87,7 @@ public class GoodsDetailActivity extends AppCompatActivity implements IGoodsDeta
         pre = new GoodsDetailPre(this, this);
         pre.getDetails(goods_id);
         pre.getCollect(goods_id);
+        pre.initCartCount(goods_id);
     }
 
     private void initGoodId() {
@@ -104,7 +105,7 @@ public class GoodsDetailActivity extends AppCompatActivity implements IGoodsDeta
                 break;
             case R.id.activity_goods_detail_ImageView_add_cart:
                 if (FuLiCenterApplication.getInstance().getCurrentUser()!=null){
-                    pre.addToCart();
+                    pre.checkCart();
                 }else {
                     startActivity(new Intent(mContext,LoginActivity.class));
                     finish();
@@ -167,7 +168,7 @@ public class GoodsDetailActivity extends AppCompatActivity implements IGoodsDeta
     }
 
     @Override
-    public void carted() {
-        activityGoodsDetailTextViewCartNumber.setText("1");
+    public void carted(String cart_count) {
+        activityGoodsDetailTextViewCartNumber.setText(cart_count);
     }
 }

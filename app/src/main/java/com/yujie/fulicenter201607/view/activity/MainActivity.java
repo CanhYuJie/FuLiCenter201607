@@ -7,12 +7,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.yujie.fulicenter201607.FuLiCenterApplication;
 import com.yujie.fulicenter201607.R;
+import com.yujie.fulicenter201607.presenter.GoodsDetailPre;
 import com.yujie.fulicenter201607.presenter.MainPre;
 import com.yujie.fulicenter201607.view.fragment.BoutiqueFragment;
 import com.yujie.fulicenter201607.view.fragment.CartFragment;
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements IMainView{
     TextView activityMainTextViewCartNumber;
     private Context mContext = MainActivity.this;
     private MainPre pre;
+    GoodsDetailPre countpre;
     private int[] radioButtonArray = {
             R.id.activity_main_RadioButton_new_good,
             R.id.activity_main_RadioButton_boutique,
@@ -53,8 +56,26 @@ public class MainActivity extends AppCompatActivity implements IMainView{
     private void initPre() {
         pre = new MainPre(this);
         pre.setReceiver(this);
+        if (FuLiCenterApplication.getInstance().getCurrentUser()!=null){
+            countpre = new GoodsDetailPre(null,this);
+            countpre.initCartCount("0");
+            activityMainTextViewCartNumber.setVisibility(View.VISIBLE);
+        }else {
+            activityMainTextViewCartNumber.setVisibility(View.GONE);
+        }
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (FuLiCenterApplication.getInstance().getCurrentUser()!=null){
+            countpre.initCartCount("0");
+            activityMainTextViewCartNumber.setVisibility(View.VISIBLE);
+        }else {
+            activityMainTextViewCartNumber.setVisibility(View.GONE);
+        }
+    }
 
     private void initChose() {
         ((RadioButton)findViewById(radioButtonArray[0])).setChecked(true);
@@ -142,7 +163,11 @@ public class MainActivity extends AppCompatActivity implements IMainView{
     }
 
     @Override
-    public void setReceiver(String msg) {
+    public void setReceiver(String msg)
+    {   if (Integer.parseInt(msg)==0){
+        activityMainTextViewCartNumber.setVisibility(View.GONE);
+        return;
+        }
         activityMainTextViewCartNumber.setText(msg);
     }
 

@@ -2,6 +2,7 @@ package com.yujie.fulicenter201607.view.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import com.yujie.fulicenter201607.R;
 import com.yujie.fulicenter201607.model.bean.Result;
 import com.yujie.fulicenter201607.presenter.LoginPre;
+import com.yujie.fulicenter201607.utils.SpUtils;
 import com.yujie.fulicenter201607.view.interface_group.ILoginView;
 
 import butterknife.Bind;
@@ -80,6 +82,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView{
 
     @Override
     public void loginSuccess(Result result) {
+        SpUtils.saveObject(this,"current_user",result);
         startActivity(new Intent(this,MainActivity.class));
         finish();
     }

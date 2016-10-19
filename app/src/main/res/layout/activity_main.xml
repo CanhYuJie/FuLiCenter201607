@@ -93,6 +93,5 @@
         android:background="@drawable/cart_hint"
         app:layout_marginLeftPercent="72.5%"
         app:layout_marginTopPercent="88.5%"
-        android:visibility="gone"
         />
 </android.support.percent.PercentRelativeLayout>
