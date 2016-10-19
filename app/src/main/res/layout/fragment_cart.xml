@@ -2,12 +2,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@null"
     tools:context="com.yujie.fulicenter201607.view.fragment.CartFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.yujie.fulicenter201607.widget.PercentLinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical"
+        android:background="#d6d4d4"
+        >
 
+        <android.support.percent.PercentRelativeLayout
+            android:layout_height="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            android:background="#fff"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="合计：￥ 1100"
+                android:textColor="#ff770f"
+                android:layout_marginTop="5dp"
+                android:textSize="18dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/sumPrice"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="省钱：￥ 40"
+                android:layout_below="@id/sumPrice"
+                android:textColor="#ff770f"
+                android:layout_marginTop="3dp"
+                android:textSize="16dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/saveMorey"
+                />
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_widthPercent="25%"
+                android:text="购买"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:id="@+id/btn_buy"
+                android:layout_margin="1dp"
+                android:background="@drawable/btn_bg_orange"
+                android:layout_alignParentRight="true"
+                />
+        </android.support.percent.PercentRelativeLayout>
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:id="@+id/cart_refresh_layout"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:id="@+id/cart_recyclerview"
+                android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        </android.support.v4.widget.SwipeRefreshLayout>
+    </com.yujie.fulicenter201607.widget.PercentLinearLayout>
 </FrameLayout>
