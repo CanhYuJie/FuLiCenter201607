@@ -44,24 +44,30 @@ public class GoodsDetailPre {
     }
 
     public void getCollect(String goods_id){
-        OkHttpUtils<MessageBean> utils = new OkHttpUtils<>(activity);
-        utils.setRequestUrl(I.REQUEST_IS_COLLECT)
-                .addParam(I.Collect.GOODS_ID,goods_id)
-                .addParam(I.Collect.USER_NAME, FuLiCenterApplication.User)
-                .targetClass(MessageBean.class)
-                .execute(new OkHttpUtils.OnCompleteListener<MessageBean>() {
-                    @Override
-                    public void onSuccess(MessageBean result) {
-                        if (result != null){
-                            view.get_collected(result.isSuccess());
+        if (FuLiCenterApplication.getInstance().getCurrentUser()!=null){
+            OkHttpUtils<MessageBean> utils = new OkHttpUtils<>(activity);
+            utils.setRequestUrl(I.REQUEST_IS_COLLECT)
+                    .addParam(I.Collect.GOODS_ID,goods_id)
+                    .addParam(I.Collect.USER_NAME,
+                            FuLiCenterApplication.getInstance().getCurrentUser().getRetData().getMuserName())
+                    .targetClass(MessageBean.class)
+                    .execute(new OkHttpUtils.OnCompleteListener<MessageBean>() {
+                        @Override
+                        public void onSuccess(MessageBean result) {
+                            if (result != null){
+                                view.get_collected(result.isSuccess());
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onError(String error) {
-                        view.getDataFailed(error);
-                    }
-                });
+                        @Override
+                        public void onError(String error) {
+                            view.getDataFailed(error);
+                        }
+                    });
+        }else {
+            view.get_collected(false);
+            return;
+        }
     }
 
     public void collect_goods(String goods_id){

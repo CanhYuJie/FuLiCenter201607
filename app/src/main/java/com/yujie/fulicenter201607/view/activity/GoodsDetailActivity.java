@@ -1,5 +1,7 @@
 package com.yujie.fulicenter201607.view.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.yujie.fulicenter201607.FuLiCenterApplication;
 import com.yujie.fulicenter201607.R;
 import com.yujie.fulicenter201607.model.bean.AlbumsBean;
 import com.yujie.fulicenter201607.model.bean.GoodsDetailsBean;
@@ -47,6 +50,7 @@ public class GoodsDetailActivity extends AppCompatActivity implements IGoodsDeta
     TextView activityGoodsDetailTextViewGoodsDetail;
     @Bind(R.id.activity_goods_detail_YuJieLoopView_looper)
     YuJieLoopView activityGoodsDetailYuJieLoopViewLooper;
+    private Context mContext = GoodsDetailActivity.this;
     private String goods_id;
     private GoodsDetailPre pre;
     private ArrayList<String> imageUrls;
@@ -64,11 +68,16 @@ public class GoodsDetailActivity extends AppCompatActivity implements IGoodsDeta
         activityGoodsDetailImageViewCollect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    //collect goods;
-                    pre.collect_goods(goods_id);
+                if (FuLiCenterApplication.getInstance().getCurrentUser()!=null){
+                    if (isChecked){
+                        //collect goods;
+                        pre.collect_goods(goods_id);
+                    }else {
+                        pre.delete_collect(goods_id);
+                    }
                 }else {
-                    pre.delete_collect(goods_id);
+                        startActivity(new Intent(mContext,LoginActivity.class));
+                        finish();
                 }
             }
         });
@@ -94,7 +103,12 @@ public class GoodsDetailActivity extends AppCompatActivity implements IGoodsDeta
                 pre.share();
                 break;
             case R.id.activity_goods_detail_ImageView_add_cart:
-
+                if (FuLiCenterApplication.getInstance().getCurrentUser()!=null){
+                    // do add to cart
+                }else {
+                    startActivity(new Intent(mContext,LoginActivity.class));
+                    finish();
+                }
                 break;
         }
     }

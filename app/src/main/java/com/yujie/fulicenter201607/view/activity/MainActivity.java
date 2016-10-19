@@ -1,6 +1,7 @@
 package com.yujie.fulicenter201607.view.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -10,6 +11,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.yujie.fulicenter201607.FuLiCenterApplication;
 import com.yujie.fulicenter201607.R;
 import com.yujie.fulicenter201607.presenter.MainPre;
 import com.yujie.fulicenter201607.view.fragment.BoutiqueFragment;
@@ -70,10 +72,18 @@ public class MainActivity extends AppCompatActivity implements IMainView{
                         setViewPagerIndex(2);
                         break;
                     case R.id.activity_main_RadioButton_cart:
-                        setViewPagerIndex(3);
+                        if (FuLiCenterApplication.getInstance().getCurrentUser()!=null){
+                            setViewPagerIndex(3);
+                        }else {
+                            startActivity(new Intent(mContext,LoginActivity.class));
+                        }
                         break;
                     case R.id.activity_main_RadioButton_personal_center:
-                        setViewPagerIndex(4);
+                        if (FuLiCenterApplication.getInstance().getCurrentUser()!=null){
+                            setViewPagerIndex(4);
+                        }else {
+                            startActivity(new Intent(mContext,LoginActivity.class));
+                        }
                         break;
                 }
             }
@@ -109,7 +119,15 @@ public class MainActivity extends AppCompatActivity implements IMainView{
 
             @Override
             public void onPageSelected(int position) {
-                ((RadioButton)findViewById(radioButtonArray[position])).setChecked(true);
+                if (position==3 | position ==4){
+                    if (FuLiCenterApplication.getInstance().getCurrentUser()!=null){
+                        ((RadioButton)findViewById(radioButtonArray[position])).setChecked(true);
+                    }else {
+                        startActivity(new Intent(mContext,LoginActivity.class));
+                    }
+                }else {
+                    ((RadioButton)findViewById(radioButtonArray[position])).setChecked(true);
+                }
             }
 
             @Override
