@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.yujie.fulicenter201607.R;
 import com.yujie.fulicenter201607.presenter.CartPre;
+import com.yujie.fulicenter201607.view.activity.PayActivity;
 import com.yujie.fulicenter201607.view.interface_group.ICartView;
 
 import butterknife.Bind;

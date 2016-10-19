@@ -115,4 +115,27 @@ public class GoodsDetailPre {
     public void share() {
         view.share(currentGoods);
     }
+
+    public void addToCart() {
+        OkHttpUtils<MessageBean> utils = new OkHttpUtils<>(activity);
+        utils.setRequestUrl(I.REQUEST_ADD_CART)
+                .addParam(I.Cart.GOODS_ID,currentGoods.getGoodsId()+"")
+                .addParam(I.Cart.USER_NAME,FuLiCenterApplication.getInstance().getCurrentUser().getRetData().getMuserName())
+                .addParam(I.Cart.COUNT,1+"")
+                .addParam(I.Cart.IS_CHECKED,String.valueOf(true))
+                .targetClass(MessageBean.class)
+                .execute(new OkHttpUtils.OnCompleteListener<MessageBean>() {
+                    @Override
+                    public void onSuccess(MessageBean result) {
+                        if (result!=null & result.isSuccess()){
+                            view.carted();
+                        }
+                    }
+
+                    @Override
+                    public void onError(String error) {
+
+                    }
+                });
+    }
 }

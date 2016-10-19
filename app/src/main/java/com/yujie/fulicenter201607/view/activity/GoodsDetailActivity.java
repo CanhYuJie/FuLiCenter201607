@@ -104,7 +104,7 @@ public class GoodsDetailActivity extends AppCompatActivity implements IGoodsDeta
                 break;
             case R.id.activity_goods_detail_ImageView_add_cart:
                 if (FuLiCenterApplication.getInstance().getCurrentUser()!=null){
-                    // do add to cart
+                    pre.addToCart();
                 }else {
                     startActivity(new Intent(mContext,LoginActivity.class));
                     finish();
@@ -164,5 +164,10 @@ public class GoodsDetailActivity extends AppCompatActivity implements IGoodsDeta
                 goodsDetails.getShareUrl(),goodsDetails.getGoodsBrief(),
                 goodsDetails.getGoodsImg(),goodsDetails.getShareUrl(),
                 goodsDetails.getGoodsBrief(),null,null);
+    }
+
+    @Override
+    public void carted() {
+        activityGoodsDetailTextViewCartNumber.setText("1");
     }
 }

@@ -71,7 +71,7 @@ public class CartPre {
                 if (cartBean.getGoodsId() == cartlist.get(position).getGoodsId()){
                     GoodsDetailsBean detailsBean = goodsDetailsList.get(cartBean.getGoodsId());
                     holder.setText(R.id.cart_goods_count,String.valueOf(cartBean.getCount()));
-                    holder.setText(R.id.cart_goods_price,detailsBean.getShopPrice());
+                    holder.setText(R.id.cart_goods_price,getInt(detailsBean.getShopPrice()));
                     holder.setText(R.id.cart_goods_name,detailsBean.getGoodsName());
                     Picasso.with(activity).load(I.DOWNLOAD_IMG_URL+detailsBean.getGoodsThumb())
                             .placeholder(R.drawable.nopic)
@@ -89,6 +89,9 @@ public class CartPre {
                     holder.setOnClickListener(R.id.btn_del_cart, new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            if (cartBean.getCount()==1){
+                                return;
+                            }
                             cartBean.setCount(cartBean.getCount()-1);
                             refreshCartCount(cartBean.getId(),cartBean.getCount(),
                                     ((CheckBox)holder.getView(R.id.cart_check)).isChecked(),holder);
@@ -160,14 +163,28 @@ public class CartPre {
                 int count = c.getCount();
                 GoodsDetailsBean goods = goodsDetailsList.get(c.getGoodsId());
                 String shopPrice = goods.getShopPrice();
-                sum+=count*Integer.parseInt(shopPrice.substring(1,shopPrice.length()));
                 String currencyPrice = goods.getCurrencyPrice();
-                total+=count*Integer.parseInt(currencyPrice.substring(1,currencyPrice.length()));
+                int shop = Integer.parseInt(getInt(shopPrice));
+                int current = Integer.parseInt(getInt(currencyPrice));
+                Log.e(TAG, "initMainCount: "+shopPrice+"\n"+currencyPrice );
+                sum+=count*shop;
+
+                total+=count*current;
             }else {
                 continue;
             }
         }
         view.changeCount(sum+"",total-sum+"");
+    }
+
+    private String getInt(String str) {
+        for (int i = 0; i < str.length(); i ++){
+            if(str.charAt(i)>=48 && str.charAt(i)<=57){
+                String number = str.substring(i,str.length());
+                return number;
+            }
+        }
+        return "0";
     }
 
     public void findCarts(final int method){
