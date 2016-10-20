@@ -1,6 +1,7 @@
 package com.yujie.fulicenter201607.utils;
 
 import android.content.Context;
+import android.widget.EditText;
 
 import com.yujie.fulicenter201607.I;
 import com.yujie.fulicenter201607.model.bean.NewGoodsBean;
@@ -104,5 +105,20 @@ public class ConvertUtils {
                 newList.add(element);
         }
         return newList;
+    }
+
+    /**
+     * 判断是否为空并进行控件提示
+     * @param str
+     * @param weiget
+     * @return
+     */
+    public static boolean ifEmpty(String str,EditText weiget){
+        if (str.isEmpty()){
+            weiget.setError("不能为空");
+            weiget.requestFocus();
+            return false;
+        }
+        return true;
     }
 }

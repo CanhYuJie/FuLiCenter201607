@@ -2,12 +2,146 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_pay"
+    android:background="#ddefefee"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.yujie.fulicenter201607.view.activity.PayActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/whitle_bg"
+        android:id="@+id/titlebar"
+        android:layout_height="?attr/actionBarSize">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="填写收货地址"
+            android:textSize="28dp"
+            android:textColor="@color/black"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/whitle_bg"
+        android:id="@+id/user_root"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/titlebar"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_height="?attr/actionBarSize">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="收货人："
+            android:textSize="28dp"
+            android:textColor="@color/black"
+            android:layout_alignParentLeft="true"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:id="@+id/edit_user_name"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/whitle_bg"
+        android:id="@+id/phone_root"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/user_root"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_height="?attr/actionBarSize">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="手机号码："
+            android:textSize="28dp"
+            android:textColor="@color/black"
+            android:layout_alignParentLeft="true"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:id="@+id/edit_phone"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/whitle_bg"
+        android:id="@+id/area_root"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/phone_root"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_height="?attr/actionBarSize">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="所在地区："
+            android:textSize="28dp"
+            android:textColor="@color/black"
+            android:layout_alignParentLeft="true"
+            />
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:id="@+id/spinner_area"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/whitle_bg"
+        android:id="@+id/street_root"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/area_root"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_height="?attr/actionBarSize">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="街道地址："
+            android:textSize="28dp"
+            android:textColor="@color/black"
+            android:layout_alignParentLeft="true"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:id="@+id/edit_street"
+            />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:text="结算"
+        android:textSize="28dp"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/btn_bg_orange"
+        android:layout_marginBottom="30dp"
+        android:id="@+id/pay_btn"
+        />
 
 </RelativeLayout>

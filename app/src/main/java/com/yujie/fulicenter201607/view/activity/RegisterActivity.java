@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.yujie.fulicenter201607.R;
 import com.yujie.fulicenter201607.presenter.RegisterPre;
+import com.yujie.fulicenter201607.utils.ConvertUtils;
 import com.yujie.fulicenter201607.view.interface_group.IRegisterView;
 
 import butterknife.Bind;
@@ -58,27 +59,13 @@ public class RegisterActivity extends AppCompatActivity implements IRegisterView
         uuid = registerUid.getText().toString();
         String pwd = registerPwd.getText().toString();
         String user_name = registerUserName.getText().toString();
-        if (ifEmpty(uuid,registerUid) & ifEmpty(pwd,registerPwd) &
-                ifEmpty(user_name,registerUserName)){
+        if (ConvertUtils.ifEmpty(uuid,registerUid) & ConvertUtils.ifEmpty(pwd,registerPwd) &
+                ConvertUtils.ifEmpty(user_name,registerUserName)){
             registerPre.register(uuid,pwd,user_name);
         }
     }
 
 
-    /**
-     * 判断是否为空并进行控件提示
-     * @param str
-     * @param weiget
-     * @return
-     */
-    public boolean ifEmpty(String str,EditText weiget){
-        if (str.isEmpty()){
-            weiget.setError("不能为空");
-            weiget.requestFocus();
-            return false;
-        }
-        return true;
-    }
 
 
     @Override
